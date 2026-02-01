@@ -2,7 +2,7 @@
 <EditableAdventure>:
     padding: 20, 0, 0, 0
     size_hint_y: None
-    height: 1160
+    height: 1200
     orientation: "vertical"
     spacing: 8
 
@@ -210,7 +210,40 @@
             markup: True
             text: "[b] Seleccionar [/b]"
             padding: 10
-    
+
+    # Sección de selección de color
+    Label:
+        index: 0
+        markup: True
+        text: "[b] Color de la avetura: [/b]"
+        font_size: 24
+        size_hint: None, None
+        size: self.texture_size 
+
+    BoxLayout:
+        size_hint: None, None
+        size: (100, 40)
+        height: 40
+        orientation: "horizontal"
+
+        Label:
+            size_hint: None, None
+            size: (8, 40)
+
+        ColorSticker:
+            canvas.before:
+                Color:
+                    rgba: self.my_color
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [8]
+
+        ColorSelectorButton:
+            size_hint: None, None
+            size: (40, 40)
+        
+            
     # Sección de selección de fecha
     Label:
         index: 0
@@ -348,3 +381,61 @@
 
     Label:
         index: 0
+
+#Estilo para la ventana de seleccion de color y sus elementos
+<ColorSelectorWindow>:
+    size_hint: None, None
+    size: (640, 480)
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    orientation: 'vertical'
+    
+    canvas.before:
+        Color:
+            rgba: (0, 0, 0, 0.95)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [12]
+
+    canvas.after:
+        Color:
+            rgba: (1, 1, 1, 0.8)
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 8)
+            width: 1.2
+    
+    Label:
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 0.8)
+            Line:
+                points: (self.x, self.y, self.x + self.parent.width, self.y)
+                width: 1
+        index: 0
+        markup: True
+        text: "Seleccione el color:"
+        font_size: 32
+        size_hint: None, None
+        size: self.texture_size
+        padding: 8
+    
+<ColorPanel>:
+    size_hint_y: None
+    height: 40          
+
+    ColorSticker:
+        id: colorView
+        canvas.before:
+            Color:
+                rgba: self.my_color
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [8]
+    SelectButton:
+        source: "assets/continue.png"
+        size_hint: None, None
+        size: (40, 40)
+        pos_hint: {'right': 1, 'top': 0.9} 
+       
+

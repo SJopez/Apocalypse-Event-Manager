@@ -198,4 +198,23 @@ class JoinHole(BoxLayout):
         self.add_widget(BodyHole(body))
         self.add_widget(ButtonSet(info, realTime))
 
+def backgroundManager(main, flag):
+    """
+    Funcion para activar/desactivar el fondo al cerrar/abrir mensajes emergentes
+    """
+    if flag:
+        Disable.value = False
+        Window.set_system_cursor('arrow')
+        for child in main.children:
+            child.opacity += 0.6
+        scroll = join_child(main, "ScrollEventInfo")
+        scroll.do_scroll = True
+    else:
+        Disable.value = True
+        Window.set_system_cursor('arrow')
+        for child in main.children:
+            child.opacity -= 0.6
+        scroll = join_child(main, "ScrollEventInfo")
+        scroll.do_scroll = False
+
 Factory.register('Error', Error)

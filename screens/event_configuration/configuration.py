@@ -206,6 +206,7 @@ class MainConfig(FloatLayout):
     def __init__(self):
         super().__init__()
         self.hole = None
+        self.color = None
         self.fileSelector = None
         self.img = Image(source="assets/background_config.png")
         self.add_widget(self.img)

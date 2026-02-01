@@ -5,7 +5,119 @@ from core.event_manager import *
 from modules.ui_utils import *
 from modules.utilities import *
 from kivy.uix.spinner import Spinner
+from kivy.uix.colorpicker import ColorWheel
+from kivy.graphics import Color, RoundedRectangle
 
+class ColorSelectorButton(ButtonBehavior, Image):
+    """
+    Boton en forma de paleta de colores
+    """
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.source = "assets/palette.png"
+        setup_hover(self, 1, scroll=True)
+    
+    hovered = False
+
+    #Abre la ventana de seleccion de color
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            main = appList().mycon
+            backgroundManager(main, 0)
+            main.color = ColorSelectorWindow()
+            main.add_widget(main.color)
+
+def pickColorHover(widget, pos):    
+    """
+    Funcion que maneja el hover dentro de la ventana de seleccion de color
+    """
+    if not Utils.errorHover:
+        return
+    if widget.collide_point(*pos):
+        widget.hovered = True
+        Window.set_system_cursor('crosshair')
+    
+    elif not widget.collide_point(*pos) and widget.hovered:
+        widget.hovered = False
+        Window.set_system_cursor('arrow')
+
+colorSelected = [0.5, 0.5, 1, 1]
+
+class Wheel(ColorWheel):
+    """
+    Paleta de colores en forma de rueda usada para seleccionar color
+    """
+    def __init__(self, panel, **kwargs):
+        super().__init__(**kwargs)
+        self.size_hint = (None, None)
+        self.size = (380, 380)
+        self.pos_hint = {'center_x': .5, 'center_y': .5}
+        self.sticker = panel.children[1]
+        self.bind(color=self.on_color)
+        Utils.errorHover = True
+        Window.bind(mouse_pos=lambda win, pos: pickColorHover(self, pos))
+
+    hovered = False
+
+    #Actualiza el color
+    def on_color(self, instance, value):
+        self.sticker.my_color = value
+        global colorSelected
+        colorSelected = value
+
+class ColorSticker(BoxLayout):
+    """
+    Etiqueta que muestra el color que se va a elegir
+    """
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.size_hint = (None, None)
+        self.size = (100, 40)
+        self.pos_hint = {'center_x': .5, 'center_y': .5}
+    
+    my_color = ListProperty([0.5, 0.5, 1, 1])
+
+class SelectButton(ButtonBehavior, Image):
+    """
+    Boton de seleccion del color
+    """
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        Utils.errorHover = True
+        Window.bind(mouse_pos=lambda win, pos: errorHover(self, pos))
+
+    hovered = False
+
+    #Selecciona el color, actualiza y cierra la ventana emergente
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            Utils.errorHover = False
+            main = appList().mycon
+            parent = join_child(main, "EditableAdventure")
+            sticker = join_child(parent, "ColorSticker")
+            sticker.my_color = colorSelected
+            main.remove_widget(main.color)
+            backgroundManager(main, 1)
+
+class ColorPanel(FloatLayout):
+    """
+    Elemento contenedor del menu de colores 
+    """
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+     
+class ColorSelectorWindow(BoxLayout):
+    """
+    Ventana emergente de seleccion de color
+    """
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.panel = ColorPanel()
+        self.wheel = Wheel(self.panel)
+        self.add_widget(self.wheel)
+        self.add_widget(self.panel)
+        self.add_widget(Label())    
+        
 class AdventureImage(Image):
     """
     Widget de imagen que representa la aventura.
@@ -51,7 +163,7 @@ class SelectImage(Button):
         """Abre el selector de archivos al presionar el botón."""
         main = appList().mycon
 
-        if self.collide_point(*touch.pos):
+        if self.collide_point(*touch.pos) and not Disable.value:
             from screens.init_menu.file_selector import openSelector
             openSelector(main, "image")
 
@@ -175,7 +287,7 @@ def createEditableAdventure(parent):
     Guarda los hijos anteriores para poder restaurarlos si es necesario (a.
     """
     parent.childs = []
-    parent.height = 1160
+    parent.height = 1240
     Window.set_system_cursor('arrow')
 
     for child in parent.children:
@@ -186,7 +298,6 @@ def createEditableAdventure(parent):
 
     parent.editable = EditableAdventure()
     parent.add_widget(parent.editable)
-   
     
 Factory.register('NameAdventure', cls=NameAdventure)
 Factory.register('Description', cls=Description)
@@ -195,5 +306,8 @@ Factory.register('PlaceSelection', cls=PlaceSelection)
 Factory.register('AdventureImage', cls=AdventureImage)
 Factory.register('PathImage', cls=PathImage)
 Factory.register('SelectImage', cls=SelectImage)
- 
+Factory.register('ColorSelectorButton', cls=ColorSelectorButton)
+Factory.register('ColorSticker', cls=ColorSticker)
+Factory.register('ColorSticker', cls=SelectButton)
+
 Builder.load_file("screens/event_configuration/widgets/styles/editable_event.kv")

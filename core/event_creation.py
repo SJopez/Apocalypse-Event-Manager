@@ -44,7 +44,10 @@ def manageAdventure(response, info, realTime):
         showMessage(Message, "Message", title, body, pos)
         
         # Asigna un ID únicos y añade el evento a running_events.json
-        current["eventID"] = current["id"]
+        from screens.event_configuration.widgets.editable_event import colorSelected
+        
+        current["eventID"] = current["id"] if current["id"] != -1 else colorSelected
+
         current["id"] = dt.datetime.now().timestamp()
         addToJson("data/dynamic/running_events.json", current)
         addToEventList(current)
@@ -52,11 +55,7 @@ def manageAdventure(response, info, realTime):
     # Limpieza de la interfaz: elimina el popup (hole) y restaura la interactividad (Disable.value=False)
     if main.hole != None:
         main.remove_widget(main.hole)
-        Disable.value = False
-        for child in main.children:
-            child.opacity += 0.6
-        scroll = join_child(main, "ScrollEventInfo")
-        scroll.do_scroll = True
+        backgroundManager(main, 1)
         main.hole = None
 
 def create_adventure():
@@ -116,12 +115,7 @@ def create_adventure():
             main = appList().mycon
             
             # Deshabilita la interfaz principal y muestra el mensaje de resolución de conflictos
-            Disable.value = True
-            Window.set_system_cursor('arrow')
-            for child in main.children:
-                child.opacity -= 0.6
-            scroll = join_child(main, "ScrollEventInfo")
-            scroll.do_scroll = False
+            backgroundManager(main, 0)
 
             main.hole = JoinHole(title, body, response[1], response[2])
             main.add_widget(main.hole)

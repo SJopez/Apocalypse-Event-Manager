@@ -2,6 +2,8 @@ from modules.modules import *
 from modules.utilities import *
 from screens.event_list.graphic.plot import createGraph, plt
 from core.event_manager import *
+from kivy.graphics import Color, Mesh, Triangle
+from kivy.utils import get_color_from_hex
 
 class EventName(Label):
     """
@@ -63,13 +65,14 @@ class DeleteButton(ButtonBehavior, Image):
             writeJson("data/dynamic/running_events.json", runningEventJson)
             resizeList(running)
 
+
 class ShowEventWIndow(BoxLayout):
     """
     Ventana emergente que muestra los detalles completos de un evento seleccionado.
     """
     def __init__(self):
         super().__init__()
-
+        
     name = StringProperty("")
     description = StringProperty("")
     dateini = StringProperty("")
@@ -79,7 +82,7 @@ class ShowEventWIndow(BoxLayout):
     place = StringProperty("")
     dg_color = ListProperty([0, 0, 0, 0])
     eventNum = StringProperty("")
-
+    color = ListProperty([1, 1, 1, 1])
 
     def update(self, event):
         """
@@ -89,6 +92,12 @@ class ShowEventWIndow(BoxLayout):
         self.name = event["titulo"]
         self.description = event["descripcion"]
         
+        if type(event["eventID"]) != int:
+            self.color = event["eventID"]
+        else:
+            print(event["eventID"])
+            self.color = get_color_from_hex(colors[event["eventID"] - 1])
+            
         # Seccion de recursos
         from screens.event_configuration.widgets.resource_widgets import ResourceP
 
@@ -150,7 +159,6 @@ def config(widget, special, opacity, parent):
     
     if opacity == 0.6:
         special.update(parent.eventJson)
-
 
 def windowAnimation(widget, main, parent=None, x=215, opacity=0.6):
     """

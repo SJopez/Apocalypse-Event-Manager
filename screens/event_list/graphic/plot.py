@@ -117,6 +117,7 @@ def createGraph():
     # Dibuja cada evento como un rectángulo en el gráfico
     for event in running:
         eini = event["fechaInicio"]
+        id = event["eventID"]
         ini = f"{eini[0]}/{eini[1]}\n{eini[2]}"
         # Calcula la posición X basada en la fecha y hora de inicio
         x = label_x.index(ini) + get_ini_sum(event) + 1
@@ -126,8 +127,10 @@ def createGraph():
             get_duration(event), 
             0.6
         )
-       
-        r.set_facecolor(colors[event["eventID"] - 1])
+        if type(id) == list:
+            r.set_facecolor(id)
+        else:
+            r.set_facecolor(colors[event["eventID"] - 1])
         r.set_edgecolor([0.07, 0.07, 0.07, 0.85])
         ax.add_patch(r)
         index += 1

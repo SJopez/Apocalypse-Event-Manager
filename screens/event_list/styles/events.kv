@@ -163,12 +163,18 @@
 <ShowEventWindow>:
     size_hint: None, None
     size: 850, 540
+    
     canvas.before:
         Color:
             rgba: (0.07, 0.07, 0.07, 1)
         Rectangle:
             pos: self.pos 
             size: self.size
+        Color:
+            rgba: self.color
+        Triangle:
+            points: self.right, self.top, self.right, self.top - 50, self.right - 50, self.top
+
  
     pos: (-850, 114)
     padding: 20
@@ -246,13 +252,14 @@
         Label:
             index: 0
     
+    
     # Panel derecho: Descripción, Recursos y Fechas
     BoxLayout:
         size_hint_x: None
         width: 550
         orientation: "vertical"
         spacing: 8
-
+        
         Label: 
             markup: True
             text: "[b]" + root.name + "[/b]"

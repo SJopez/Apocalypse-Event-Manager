@@ -95,7 +95,6 @@ class ShowEventWIndow(BoxLayout):
         if type(event["eventID"]) != int:
             self.color = event["eventID"]
         else:
-            print(event["eventID"])
             self.color = get_color_from_hex(colors[event["eventID"] - 1])
             
         # Seccion de recursos

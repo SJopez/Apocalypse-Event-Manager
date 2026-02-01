@@ -1,14 +1,19 @@
 [
     {
-        "id": -1,
-        "titulo": "Atender cultivos",
+        "id": 1,
+        "titulo": "Aniquilamiento en la vecindad",
         "tipo": [
-            "Supervivencia"
+            "Defensa"
         ],
-        "descripcion": "Tu cuerpo no aguantar\u00e1 mucho tiempo comiendo solamente comida enlatada, pr\u00e9stale atenci\u00f3n a tus cultivos y al menos comer\u00e1s como un rey hasta que los infectados te coman a ti el cerebro",
-        "peligro": 1,
-        "ubicacion": "Patio exterior",
-        "necesita": [],
-        "recurrente": true
+        "descripcion": "Nunca est\u00e1 de m\u00e1s salir un rato a estirar las piernas por los alrededores del refugio y eliminar alg\u00fan que otro infectado por el camino, pero ten cuidado no te sigan al regresar!",
+        "peligro": 2,
+        "ubicacion": "Alrededores del refugio",
+        "necesita": [
+            1,
+            2,
+            7,
+            8
+        ],
+        "recurrente": false
     }
 ]

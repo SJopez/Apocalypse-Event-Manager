@@ -1,9 +1,9 @@
-# ☢️ Event Manager Apocalipsis
+# ☢️ Apocalypse Event Manager
 
 [![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
 [![Kivy](https://img.shields.io/badge/Kivy-20232A?style=for-the-badge&logo=kivy&logoColor=FFD54F)](https://kivy.org/)
 
-Bienvenido a **Event Manager Apocalipsis**, una herramienta de gestión de supervivencia diseñada para administrar recursos y eventos en un refugio postapocalíptico.
+Bienvenido a **Apocalypse Event Manger**, una herramienta de gestión de supervivencia diseñada para administrar recursos y eventos en un refugio postapocalíptico.
 
 ## 📜 Tabla de Contenidos
 1. [🌐 Dominio del Proyecto](#-dominio-del-proyecto)
@@ -334,6 +334,8 @@ Si te sientes con el coraje de moldear tu propia aventura entonces este es tu lu
 
 Por supuesto, tu aventura debe tener una imagen horrorosa que represente lo peligrosa que puede llegar a ser. Para ello, puedes pulsar en el botón **Seleccionar** debajo de la imagen y se abrirá un selector de archivos con el cual podrás navegar por tus directorios y seleccionar cualquier imagen que desees en formato .png/.jpg. ¡Asegúrate de que sea lo suficientemente horrenda! 🐱
 
+Para mayor personalización, se añadió la opción de seleccionar un color que identifique cada aventura, facilitando así su visualización en el **Diagrama de Gantt** (consulte la última sección para más detalles).
+
 Por último, y al igual que para las aventuras predefinidas, tenemos la sección de selección de fecha y hora. No se hará hincapié en la misma pues ya fue descrita arriba (ver **Aventura Predefinida** ⬆️).
 
 #### Panel Derecho: Mochila
@@ -392,13 +394,15 @@ Los iconos en el tipo corresponden a:
 *   **Refugio:** Casa 🏠
 *   **Supervivencia:** Hoguera 🔥
 
+**Nota**: En la esquina superior derecha se representa el color escogido para su aventura!
+
 ### 5. Gráfico (Diagrama de Gantt)
 
 <img src="assets/readme/ui_9.png" width="800">
 
 Este gráfico contiene información detallada visual sobre los distintos eventos planificados y su solapamiento. En el **eje X** se encuentran cada uno de los días hasta la fecha máxima en que se ha planificado un evento, mientras que en el **eje Y** tenemos los eventos (aventuras) representados por su ID.
 
-Cada evento predefinido tiene un color único, mientras que los eventos personalizados tienen color **morado**.
+Cada evento predefinido tiene un color único, mientras que los eventos personalizados tienen un color elegido por el usuario.
 
 Mediante las flechas del teclado es posible navegar por el gráfico:
 *   **Eje X (Tiempo):** Flechas izquierda y derecha ⬅️ ➡️

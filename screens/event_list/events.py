@@ -218,7 +218,7 @@ def resizeList(parent, value=None):
     childCount = len(readJson("data/dynamic/running_events.json")) if value == None else value
     childCount += 4 if childCount % 4 != 0 else 0
     childCount -= (childCount % 4)
-    parent.height = (childCount / 4) * 460 + (childCount / 4) * 20 + 170
+    parent.height = (childCount / 4) * 480 + (childCount / 4) * 20 + 170
 
 class JoinEvent(TextInput):
     """

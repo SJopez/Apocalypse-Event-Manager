@@ -62,12 +62,11 @@
     size_hint_y: None
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     orientation: "lr-tb"
-       
 
 # Widget que representa un evento individual en la lista
 <RunningEvent>:
     size_hint: None, None
-    size: (285, 460)
+    size: (285, 480)
     orientation: "vertical"
 
     # Fondo oscuro para la tarjeta del evento
@@ -101,46 +100,48 @@
     BoxLayout:
         orientation: "vertical"
         size_hint: None, None
-        height: 170
+        height: 200
         EventName:
             id: inputName
-            markup: True
-            text: "[b]" + self.textName + "[/b]"
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Medium.ttf'
+            text: self.textName
             text_size: (280, None)
             size_hint: None, None
             size: self.texture_size
-            font_size: 17
+            font_size: 20
             padding: 8
         Ini:
             id: timeIni
-            markup: True
-            text: "[b] Inicio: [/b]" + self.ini
-            font_size: 17
+            text: "Inicio: " + self.ini
+            font_size: 18
             size_hint: None, None
             size: self.texture_size
             padding: 8
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf'
         End:
             id: timeEnd
             markup: True
-            text: "[b] Final: [/b]" + self.end
-            font_size: 17
+            text: "Final: " + self.end
+            font_size: 18
             size_hint: None, None
             size: self.texture_size
             padding: 8
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf'
         EventNum:
             id: eventNum
-            markup: True
-            text: "[b] ID de Aventura: [/b]" + self.enum
-            font_size: 17
+            text: "ID de Aventura: " + self.enum
+            font_size: 18
             size_hint: None, None
             size: self.texture_size
             padding: 8
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf'
         Label:
             size_hint: None, None
             size: (285, 20)
         
         # Botones de acción (Ver detalles, Eliminar)
         BoxLayout:
+            padding: 0, 10, 0, 8
             Label:
                 size_hint: None, None
                 width: 200
@@ -163,7 +164,7 @@
 <ShowEventWindow>:
     size_hint: None, None
     size: 850, 540
-    
+ 
     canvas.before:
         Color:
             rgba: (0.07, 0.07, 0.07, 1)
@@ -209,15 +210,17 @@
         Label: 
             markup: True
             text: "[b]Tipo de aventura:[/b]"
-            font_size: 20
+            font_size: 22
             size_hint: None, None
             size: self.texture_size
             pos_hint: {'center_x': .5, 'y': 0}
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
         BoxLayout:
             id: typeContainer
             size_hint: None, None
             size: (100, 50)
             pos_hint: {'center_x': .5, 'y': 0}
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf' 
         Label:
             size_hint: None, None
             height: 10
@@ -228,6 +231,7 @@
             size_hint: None, None
             size: self.texture_size
             pos_hint: {'center_x': .5, 'y': 0}
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
         Label:
             text: root.danger
             color: root.dg_color
@@ -235,6 +239,7 @@
             size_hint: None, None
             size: self.texture_size
             pos_hint: {'center_x': .5, 'y': 0}
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf' 
         Label: 
             markup: True
             text: "[b]Ubicacion[/b]"
@@ -243,12 +248,14 @@
             size: self.texture_size
             padding: 0, 20, 0, 0
             pos_hint: {'center_x': .5, 'y': 0}
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
         Label:
             text: root.place
             font_size: 18
             size_hint: None, None
             size: self.texture_size
             pos_hint: {'center_x': .5, 'y': 0}       
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf' 
         Label:
             index: 0
     
@@ -266,6 +273,8 @@
             font_size: 28
             size_hint: None, None
             size: self.texture_size
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
+        
         Label:
             size_hint: None, None
             width: 490
@@ -283,6 +292,7 @@
             size_hint: None, None
             size: self.texture_size 
             index: 0
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
         Label:
             size_hint: None, None
             size: 450, self.texture_size[1] + 20
@@ -292,7 +302,8 @@
             markup: 0
             font_size: 18
             index: 0
-    
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf'
+        
             canvas.before:
                 Color:
                     rgba: 0.15, 0.15, 0.2, 0.5
@@ -312,7 +323,8 @@
             text: "[b] Recursos necesarios: [/b]"
             font_size: 22
             size_hint: None, None
-            size: self.texture_size 
+            size: self.texture_size
+            font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf' 
         NeedResources:
             id: need
             index: 0
@@ -339,12 +351,14 @@
                     font_size: 22
                     size_hint: None, None
                     size: self.texture_size
+                    font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
                 Label:
                     markup: True
                     text: root.dateini
                     font_size: 20
                     size_hint: None, None
                     size: self.texture_size
+                    font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf'
             Label:
                 size_hint: None, None
                 width: 130
@@ -356,13 +370,14 @@
                     font_size: 22
                     size_hint: None, None
                     size: self.texture_size
-
+                    font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
                 Label:
                     markup: True
                     text: root.datend
                     font_size: 20
                     size_hint: None, None
                     size: self.texture_size
+                    font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf'
             Label:
                 size_hint: None, None
                 width: 150
@@ -375,11 +390,13 @@
                     font_size: 22
                     size_hint: None, None
                     size: self.texture_size
+                    font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-Bold.ttf'
                 Label:
                     text: " " + root.eventNum
                     font_size: 20
                     size_hint: None, None
-                    size: self.texture_size 
+                    size: self.texture_size
+                    font_name: 'fonts/Roboto,Roboto_Condensed/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf' 
             Label:
                 index: 0                
         

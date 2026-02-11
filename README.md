@@ -207,10 +207,10 @@ Un entorno virtual es como una caja aislada donde instalaremos las herramientas 
 
 **En Windows:**
 ```bash
-# Crear el entorno (la caja)
+# Crear el entorno 
 python -m venv venv
 
-# Activar el entorno (entrar en la caja)
+# Activar el entorno
 .\venv\Scripts\activate
 ```
 
@@ -222,18 +222,27 @@ python3 -m venv venv
 # Activar el entorno
 source venv/bin/activate
 ```
-*Nota: Cuando el entorno está activo, verás `(venv)` al principio de la línea en tu terminal.*
 
 ### 3. Instalar Dependencias
-Ahora que estamos dentro del entorno virtual, necesitamos instalar las librerías (herramientas) que usa el programa, como Kivy.
+Ahora que estamos dentro del entorno virtual, necesitamos instalar las librerías que usa el programa, como Kivy.
 
 Ejecuta este comando:
 ```bash
 pip install -r requirements.txt
 ```
-*Espera a que termine la instalación. Verás muchas líneas de texto, es normal.*
 
-### 4. Ejecutar la Aplicación
+### 4. Instalar KivyMD
+Finalmente necesitamos instalar de forma independiente la librería KivyMD, para ello ejecuta en la terminal los siguientes comandos:
+
+```bash
+# Clona el repositorio
+git clone https://github.com/kivymd/KivyMD repo
+
+# Extrae kivymd hacia el directorio 
+mv repo/kivymd .
+```
+
+### 5. Ejecutar la Aplicación
 ¡Todo listo! Ahora solo queda iniciar el programa.
 
 Asegúrate de estar en la carpeta raíz del proyecto (donde está el archivo `main.py`) y ejecuta:
@@ -307,16 +316,19 @@ Dentro de las aventuras predefinidas, se muestra información de la misma:
 *   **Nivel de Peligro:** Indicador de riesgo basado en la escala de peligros (ej. "Pan comido", "Muerte segura").
 *   **Ubicación:** El lugar donde se desarrollará el evento.
 
-<img src="assets/readme/ui_5.1.png" width="800">
-
 **Recursos Necesarios:** Lista de suministros requeridos.
 
 Además, por comodidad, dispones de un botón para **seleccionar automáticamente los recursos necesarios**, evitando que tengas que volver a la ventana anterior para buscarlos manualmente.
 
 Por último, encontrarás los controles para establecer la duración de tu aventura:
 
-*   **Selección de Fecha:** Al pulsar los botones de Inicio/Final, se abrirá una ventana interactiva de calendario en la esquina superior derecha. Para seleccionar un día específico, basta con navegar hasta él usando las flechas de la parte inferior y hacer clic sobre el mismo. La ventana se cerrará y el día quedará registrado en el espacio correspondiente debajo de Inicio/Final.
-*   **Selección de Hora:** Debajo de las fechas, encontrarás entradas numéricas para establecer la hora exacta en formato 24h, tal como indica la nota al final del panel.
+<img src="assets/readme/ui_5.1.png" width="800">
+
+*   **Selección de Fecha:** Al pulsar los botones de Inicio/Final, se abrirá una ventana interactiva de calendario en el centro de la pantalla. Para seleccionar un día específico, basta con navegar hasta él usando las flechas de la parte inferior y hacer clic sobre el mismo. La ventana se cerrará y el día quedará registrado en el espacio correspondiente debajo de los botones de Inicio/Final.
+
+<img src="assets/readme/ui_5.2.png" width="800">
+
+*   **Selección de Hora:** Al igual que en la fecha, para seleccionar la hora se dispone de un widget interactivo de tipo reloj. Puede elegir el horario deseado pulsando en la rueda de la derecha y a su vez alternar entre AM/PM u hora/minutos.
 
 #### Aventura Personalizada
 

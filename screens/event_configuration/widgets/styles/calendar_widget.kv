@@ -41,14 +41,14 @@
     # Fondo oscuro semitransparente para el calendario
     canvas.before:
         Color:
-            rgba: (0.07, 0.07, 0.07, 0.95)
+            rgba: (0.07, 0.07, 0.07, 1)
         Rectangle:
             pos: self.pos
             size: self.size
     # Borde redondeado gris claro
     canvas.after:
         Color:
-            rgba: 0.8, 0.8, 0.8, 0.8
+            rgba: 0.8, 0.8, 0.8, 1
         Line:
             rounded_rectangle: (self.x, self.y, self.width, self.height, 12)
             width: 1.2

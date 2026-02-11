@@ -76,7 +76,7 @@ class TimePicker(MDTimePickerDialHorizontal):
     #Activa el fondo al remover el widget
     def on_dismiss(self, *args):
         main = appList().mycon
-        backgroundManager(main, True, sum=0.6)
+        backgroundManager(main, True, sum=0)
     
     #Remover al pulsar Cancelar
     def on_cancel(self, *args):
@@ -109,7 +109,7 @@ class TimePickerButton(Button):
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
             main = appList().mycon
-            backgroundManager(main, False, sum=0.6)
+            backgroundManager(main, False, sum=0)
             clock = TimePicker(self)
             clock.open()
 

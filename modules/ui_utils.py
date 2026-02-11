@@ -202,7 +202,7 @@ class JoinHole(BoxLayout):
         self.add_widget(BodyHole(body))
         self.add_widget(ButtonSet(info, realTime))
 
-def backgroundManager(main, flag, sum=0):
+def backgroundManager(main, flag, sum=0.6):
     """
     Funcion para activar/desactivar el fondo al cerrar/abrir mensajes emergentes
     """
@@ -210,14 +210,14 @@ def backgroundManager(main, flag, sum=0):
         Disable.value = False
         Window.set_system_cursor('arrow')
         for child in main.children:
-            child.opacity += (0.6 - sum)
+            child.opacity += sum
         scroll = join_child(main, "ScrollEventInfo")
         scroll.do_scroll = True
     else:
         Disable.value = True
         Window.set_system_cursor('arrow')
         for child in main.children:
-            child.opacity -= (0.6 - sum)
+            child.opacity -= sum
         scroll = join_child(main, "ScrollEventInfo")
         scroll.do_scroll = False
 
@@ -228,7 +228,7 @@ def calendar_removal(child):
     if Disable.value:
         main = appList().mycon
         main.remove_widget(child)
-        backgroundManager(main, True)
+        backgroundManager(main, True, sum=0.4)
 
 def AppearAnimation(parent):
     """

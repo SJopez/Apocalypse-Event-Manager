@@ -20,7 +20,7 @@ class DateIniButton(Button):
         """
         if self.collide_point(*touch.pos) and (appList().mycon.children[0].__class__.__name__ != "TotalCalendar") and not Disable.value:
             main = appList().mycon
-            backgroundManager(main, False)
+            backgroundManager(main, False, sum=0.4)
             calendar = TotalCalendar(0)
             AppearAnimation(calendar)
             main.add_widget(calendar)
@@ -42,7 +42,7 @@ class DateEndButton(Button):
         """
         if self.collide_point(*touch.pos) and (appList().mycon.children[0].__class__.__name__ != "TotalCalendar") and not Disable.value:
             main = appList().mycon
-            backgroundManager(main, False)
+            backgroundManager(main, False, sum=0.4)
             calendar = TotalCalendar(1)
             AppearAnimation(calendar)
             main.add_widget(calendar)

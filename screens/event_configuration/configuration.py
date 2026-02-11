@@ -7,6 +7,8 @@ from modules.utilities import *
 from screens.event_configuration.widgets.editable_event import *
 from screens.event_configuration.widgets.configuration_widgets import *
 from screens.event_configuration.widgets.configuration_buttons import *
+from kivymd.uix.pickers import MDTimePickerDialHorizontal
+from datetime import time
 
 class NeedResources(StackLayout):
     """
@@ -57,6 +59,91 @@ class AddNeedButton(Button):
         
     hovered = False      
 
+class TimePicker(MDTimePickerDialHorizontal):
+    """
+    Widget de tipo reloj para eleccion de hora
+    """
+    def __init__(self, button, **kwargs):
+        super().__init__(**kwargs)
+
+        self.button = button
+        title = join_child(self, "MDLabel")
+        title.text = "Seleccione la hora"
+        container = join_child(self, "MDTimePickerButtonsContainer")
+        container.children[0].children[0].text = "Aceptar"
+        container.children[1].children[0].text = "Cancelar"
+
+    #Activa el fondo al remover el widget
+    def on_dismiss(self, *args):
+        main = appList().mycon
+        backgroundManager(main, True, sum=0.6)
+    
+    #Remover al pulsar Cancelar
+    def on_cancel(self, *args):
+        self.dismiss()
+    
+    #Envia la informacion al padre para guardarla y procesarla y remueve el widget
+    def on_ok(self, *args):
+        main = appList().mycon
+        parent = join_child(main, "EventInfo")
+        
+        t = [self.time.hour, self.time.minute]
+        
+        if self.button.type:
+            parent.updateHourIni(t)
+        else:
+            parent.updateHourEnd(t)
+
+        self.dismiss()
+
+class TimePickerButton(Button):
+    """
+    Clase para los botones que abren el TimePicker
+    """
+    def __init__(self, type, **kwargs):
+        super().__init__(**kwargs)
+        self.value = None
+        self.type = type
+
+    #Abre el TimePicker al pulsar y desactiva el fondo
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            main = appList().mycon
+            backgroundManager(main, False, sum=0.6)
+            clock = TimePicker(self)
+            clock.open()
+
+class TimePickerButtonIni(TimePickerButton):
+    """
+    Boton para elegir la hora de inicio
+    """
+    def __init__(self, **kwargs):
+        super().__init__(True, **kwargs)
+        setup_hover(self, 1, scroll=True)
+    
+    hovered = False
+    
+class TimePickerButtonEnd(TimePickerButton):
+    """
+    Boton para elegir la hora de fin
+    """
+    def __init__(self, **kwargs):
+        super().__init__(False, **kwargs)
+        setup_hover(self, 1, scroll=True)
+    
+    hovered = False
+
+def parse(value):
+    """
+    Pone ceros delante si es necesario para mejorar la visualizacion
+    """
+    if value[0] < 10:
+        value[0] = "0" + str(value[0])
+    if value[1] < 10:
+        value[1] = "0" + str(value[1])
+
+    return str(value[0]) + ":" + str(value[1])
+
 class EventInfo(BoxLayout):
     """
     Panel principal que muestra la información detallada del evento seleccionado.
@@ -66,10 +153,11 @@ class EventInfo(BoxLayout):
         super().__init__()
         self.orientation = "vertical"
         self.need = self.ids.need
-        self.timeIni = (self.ids.hourIni, self.ids.minuIni)
-        self.timeEnd = (self.ids.hourEnd, self.ids.minuEnd)
         self.dateIni = self.ids.dateini
         self.dateEnd = self.ids.datend
+        self.hourIni = self.ids.hourini
+        self.hourEnd = self.ids.hourend
+        self.time = [time(0, 0), time(0, 0)]
         self.current = 0
         self.childs = []
         self.editable = None
@@ -145,16 +233,44 @@ class EventInfo(BoxLayout):
             self.danger_color = dg_colors[dg]
             self.place = "• " + e["ubicacion"]
             self.height = 500 + self.need.height + HeightDescription[e["id"]] + 75
+    
+    def updateHourIni(self, value):
+        """
+        Actualiza la hora de inicio en el widget correspondiente.
+        """
+        self.time[0] = time(value[0], value[1])
+        value = parse(value)
+
+        if self.editable != None:
+            self.editable.hourIni.text = value
+        else:
+            self.hourIni.text = value
+
+    def updateHourEnd(self, value):
+        """
+        Actualiza la fecha de fin en el widget correspondiente. 
+        """
+        self.time[1] = time(value[0], value[1])
+        value = parse(value)
         
+        if self.editable != None:
+            self.editable.hourEnd.text = value
+        else:
+            self.hourEnd.text = value
+
     def updateIni(self, value):
-        """Actualiza la fecha de inicio en el widget correspondiente."""
+        """
+        Actualiza la fecha de inicio en el widget correspondiente.
+        """
         if self.editable != None:
             self.editable.dateIni.text = value
         else:
             self.dateIni.text = value
 
     def updateEnd(self, value):
-        """Actualiza la fecha de fin en el widget correspondiente."""
+        """
+        Actualiza la fecha de fin en el widget correspondiente.
+        """
         if self.editable != None:
             self.editable.dateEnd.text = value
         else:
@@ -219,4 +335,4 @@ class MainConfig(FloatLayout):
         self.add_widget(self.reso)
         self.command = FloatContainer(CommandAdventure())
         self.add_widget(self.command)
-       
+

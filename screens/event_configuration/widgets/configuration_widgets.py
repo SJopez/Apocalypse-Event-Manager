@@ -2,7 +2,7 @@ from modules.modules import *
 from modules.utilities import *
 from screens.event_configuration.widgets.calendar_widget import TotalCalendar
 from kivy.uix.dropdown import DropDown
-from modules.ui_utils import configShowAnimation
+from modules.ui_utils import *
 
 class DateIniButton(Button):
     """
@@ -19,7 +19,11 @@ class DateIniButton(Button):
         Abre el widget TotalCalendar en modo 'fecha-inicio' (0) si no está ya abierto o deshabilitado.
         """
         if self.collide_point(*touch.pos) and (appList().mycon.children[0].__class__.__name__ != "TotalCalendar") and not Disable.value:
-            appList().mycon.add_widget(TotalCalendar(0))
+            main = appList().mycon
+            backgroundManager(main, False)
+            calendar = TotalCalendar(0)
+            AppearAnimation(calendar)
+            main.add_widget(calendar)
             
 
 class DateEndButton(Button):
@@ -37,7 +41,11 @@ class DateEndButton(Button):
         Abre el widget TotalCalendar en modo 'fecha-fin' (1) si no está ya abierto o deshabilitado.
         """
         if self.collide_point(*touch.pos) and (appList().mycon.children[0].__class__.__name__ != "TotalCalendar") and not Disable.value:
-            appList().mycon.add_widget(TotalCalendar(1))
+            main = appList().mycon
+            backgroundManager(main, False)
+            calendar = TotalCalendar(1)
+            AppearAnimation(calendar)
+            main.add_widget(calendar)
 
 class Date(Label):
     """

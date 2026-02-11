@@ -7,6 +7,7 @@ from modules.utilities import *
 from kivy.uix.spinner import Spinner
 from kivy.uix.colorpicker import ColorWheel
 from kivy.graphics import Color, RoundedRectangle
+from datetime import time
 
 class ColorSelectorButton(ButtonBehavior, Image):
     """
@@ -276,8 +277,9 @@ class EditableAdventure(BoxLayout):
     """
     def __init__(self):
         super().__init__()
-        self.timeIni = (self.ids.hourIni, self.ids.minuIni)
-        self.timeEnd = (self.ids.hourEnd, self.ids.minuEnd)
+        self.hourIni = self.ids.hourini
+        self.hourEnd = self.ids.hourend
+        self.time = [time(0, 0), time(0, 0)]
         self.dateIni = self.ids.dateini
         self.dateEnd = self.ids.datend
     
@@ -287,7 +289,7 @@ def createEditableAdventure(parent):
     Guarda los hijos anteriores para poder restaurarlos si es necesario (a.
     """
     parent.childs = []
-    parent.height = 1240
+    parent.height = 1250
     Window.set_system_cursor('arrow')
 
     for child in parent.children:

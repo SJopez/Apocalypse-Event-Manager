@@ -3,6 +3,7 @@ from modules.utilities import *
 from core.event_manager import validateEventInfo, checkEvent, mergeInformation, createEvent, validResources
 from modules.ui_utils import *
 import datetime as dt
+from datetime import timedelta
 
 def addToEventList(event):
     """
@@ -31,8 +32,11 @@ def manageAdventure(response, info, realTime):
             # Si hay información de tiempo proveniente de la búsqueda de intervalo, actualiza las fechas y horas del evento
             current["fechaInicio"] = [str(info[0].day), str(info[0].month), str(info[0].year)]
             current["fechaFin"] = [str(info[1].day), str(info[1].month), str(info[1].year)]
-            current["tiempoInicio"] = [info[0].hour - 5, info[0].minute]
-            current["tiempoFin"] = [info[1].hour - 5, info[1].minute]
+            
+            time = [info[0] - timedelta(hours=5), info[1] - timedelta(hours=5)]
+
+            current["tiempoInicio"] = [time[0].hour, time[0].minute]
+            current["tiempoFin"] = [time[1].hour, time[1].minute]
             current["tiempoReal"] = [*realTime]
          
         # Asigna un número identificativo único al evento

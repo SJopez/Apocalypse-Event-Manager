@@ -1,4 +1,5 @@
 # Elementos definidos en el .py
+#:import TimePickerButton screens.event_configuration.configuration.TimePickerButton
 #:import NeedResources screens.event_configuration.configuration.NeedResources
 #:import DateIniButton screens.event_configuration.configuration.DateIniButton
 #:import DateEndButton screens.event_configuration.configuration.DateEndButton
@@ -334,75 +335,54 @@
         size_hint: None, None
         size: self.texture_size 
         pos_hint:{'x': 0.05, 'y':0}
-    
-    # Inputs para hora de inicio y fin (HH:MM - HH:MM)
+
     BoxLayout:
         pos_hint: {'x': 0.06, 'y': 0}
         size_hint: None, None
         height: 30
-        # Hora inicio
-        TimeInput:
-            id: hourIni
-            name: "ini"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
-        Label:
-            text: ":"
+
+        TimePickerButtonIni:
+            font_size: 20
+            text: "Inicio"
             size_hint: None, None
-            pos_hint: {'center_x': .5, "center_y": .5}
-            width: 20
-        # Minuto inicio
-        TimeInput:
-            id: minuIni
-            name: "ini"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
+            size: self.texture_size 
+            padding: 4
         Label:
             text: "-"
             size_hint: None, None
             pos_hint: {'center_x': .5, "center_y": .5}
             width: 40
-        # Hora fin
-        TimeInput:
-            id: hourEnd
-            name: "end"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
+        TimePickerButtonEnd:
+            font_size: 20
+            text: "Final"
+            size_hint: None, None
+            size: self.texture_size 
+            padding: 4
+
+    BoxLayout:
+        pos_hint: {'x': 0.055, 'y': 0}
+        size_hint: None, None
+        height: 30
+
         Label:
-            text: ":"
+            id: hourini
+            font_size: 20
+            text: "00:00"
+            size_hint: None, None
+            size: self.texture_size 
+            padding: 4
+        Label:
+            text: "-"
             size_hint: None, None
             pos_hint: {'center_x': .5, "center_y": .5}
-            width: 20
-        # Minuto fin
-        TimeInput:
-            id: minuEnd
-            name: "end"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
-    
-    # Nota informativa sobre el formato de hora
-    Label:
-        index: 0
-        markup: True
-        text: "[b]Nota:[/b] Los horarios se interpretan en el formato de de 24 horas!"
-        font_size: 16
-        size_hint: None, None
-        size: self.texture_size
-        color: 1, 1, 1, 0.8
-        padding: 0, 10, 0, 0 
-        pos_hint: {'x': .06, "y": 0}
+            width: 40
+        Label:
+            id: hourend
+            font_size: 20
+            text: "00:00"
+            size_hint: None, None
+            size: self.texture_size
+            padding: 4
 
     Label:
         size_hint: None, None
@@ -466,3 +446,19 @@
         Line:
             rounded_rectangle: (self.x, self.y, self.width, self.height, 5)
             width: 2
+
+<TimePicker>:
+    canvas.before:
+        Color:
+            rgba: (0.07, 0.07, 0.07, 0.95)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    canvas.after:
+        Color:
+            rgba: 0.8, 0.8, 0.8, 0.8
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 12)
+            width: 1.2
+
+    

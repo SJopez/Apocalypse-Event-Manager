@@ -15,5 +15,51 @@
             8
         ],
         "recurrente": false
+    },
+    {
+        "id": 1,
+        "titulo": "Aniquilamiento en la vecindad",
+        "tipo": [
+            "Defensa"
+        ],
+        "descripcion": "Nunca est\u00e1 de m\u00e1s salir un rato a estirar las piernas por los alrededores del refugio y eliminar alg\u00fan que otro infectado por el camino, pero ten cuidado no te sigan al regresar!",
+        "peligro": 2,
+        "ubicacion": "Alrededores del refugio",
+        "necesita": [
+            1,
+            2,
+            7,
+            8
+        ],
+        "recurrente": false,
+        "recursos": {
+            "8": 1,
+            "7": 1,
+            "2": 1,
+            "1": 1
+        },
+        "tiempoReal": [
+            3379071660.0,
+            3380745660.0
+        ],
+        "fechaInicio": [
+            "9",
+            "1",
+            "2077"
+        ],
+        "fechaFin": [
+            "28",
+            "1",
+            "2077"
+        ],
+        "tiempoInicio": [
+            1,
+            0
+        ],
+        "tiempoFin": [
+            10,
+            0
+        ],
+        "imagen": "assets/event_running_images/1.png"
     }
 ]

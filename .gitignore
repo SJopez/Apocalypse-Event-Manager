@@ -1,5 +1,6 @@
 kivy_deps_build/
 kivy_venv/
 venv/
+kivymd
 __pycache__/
 *.py[oc]

@@ -19,6 +19,10 @@ def sortEvents(eventList):
     ordered = [x[1] for x in pairList]
     eventList.update(True, ordered)
 
+def AppearAnimation(parent):
+    anima = Animation(opacity=1, duration=0.5)
+    anima.start(parent)
+
 def DisolveAnimation(parent, widget, duration, opacity, delay, flag=False):
     """
     Aplica una animación de disolución (cambio de opacidad) a un widget.
@@ -198,7 +202,7 @@ class JoinHole(BoxLayout):
         self.add_widget(BodyHole(body))
         self.add_widget(ButtonSet(info, realTime))
 
-def backgroundManager(main, flag):
+def backgroundManager(main, flag, sum=0):
     """
     Funcion para activar/desactivar el fondo al cerrar/abrir mensajes emergentes
     """
@@ -206,15 +210,41 @@ def backgroundManager(main, flag):
         Disable.value = False
         Window.set_system_cursor('arrow')
         for child in main.children:
-            child.opacity += 0.6
+            child.opacity += (0.6 - sum)
         scroll = join_child(main, "ScrollEventInfo")
         scroll.do_scroll = True
     else:
         Disable.value = True
         Window.set_system_cursor('arrow')
         for child in main.children:
-            child.opacity -= 0.6
+            child.opacity -= (0.6 - sum)
         scroll = join_child(main, "ScrollEventInfo")
         scroll.do_scroll = False
 
+def calendar_removal(child):
+    """
+    Funcion de utilidad para remover el calendario cuando acaba la animacion
+    """
+    if Disable.value:
+        main = appList().mycon
+        main.remove_widget(child)
+        backgroundManager(main, True)
+
+def AppearAnimation(parent):
+    """
+    Animacion de tipo fade-in que hace aparecer el calendario
+    """
+    parent.opacity = 0
+    anima = Animation(duration=0.3, opacity=1)
+    anima.start(parent)
+
+def Disappear(parent):
+    """
+    Animacion de tipo fade-out que hace desaparecer el calendario
+    """
+    anima = Animation(duration=0.3, opacity=0)
+    anima.on_complete = lambda parent: calendar_removal(parent)
+    anima.start(parent)
+
+#Importa la clase Error hacia el archivo.kv
 Factory.register('Error', Error)

@@ -1,5 +1,6 @@
 from modules.modules import *
 from modules.utilities import *
+from modules.ui_utils import *
 
 # Lista de nombres de meses para mostrar en la interfaz. El índice 0 es un marcador de posición.
 months = [0, "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
@@ -19,15 +20,12 @@ class AdvanceMonth(ButtonBehavior, Image):
         self.source = "assets/right.png"
         self.size_hint: None
         self.size = (40, 40)
-        self.hover = setup_hover(self, 1)
-
-    hovered = False
 
     def on_touch_down(self, touch):
         """
         Maneja el evento de toque. Si se toca el botón, actualiza el calendario al siguiente mes.
         """
-        if self.collide_point(*touch.pos) and not Disable.value:
+        if self.collide_point(*touch.pos):
             getCalendar().update(1)
 
 class PreviousMonth(ButtonBehavior, Image):
@@ -39,17 +37,12 @@ class PreviousMonth(ButtonBehavior, Image):
         self.source = "assets/left.png"
         self.size_hint: None
         self.size = (40, 40)
-        # Si flag es True (estamos en el mes inicial de la fecha origen), de esta manera solo se configura el hover si el botón está activo 
-        # Es decir, si el mes no es el inicial de la fecha origen y es posible retroceder.
-        self.hover = setup_hover(self, 1) if not flag else None
-
-    hovered = False
 
     def on_touch_down(self, touch):
         """
         Maneja el evento de toque. Si se toca el botón, actualiza el calendario al mes anterior.
         """
-        if self.collide_point(*touch.pos) and not Disable.value:
+        if self.collide_point(*touch.pos):
             getCalendar().update(0)
 
 class Day(Label):
@@ -59,9 +52,6 @@ class Day(Label):
     def __init__(self, text):
         super().__init__()
         self.text = text
-        self.hover = setup_hover(self, 1, 0.7)
-    
-    hovered = False
         
     def on_touch_down(self, touch):
         """
@@ -69,7 +59,7 @@ class Day(Label):
         Actualiza la fecha de inicio o fin en EventInfo y cierra el calendario.
         """
         calendar = getCalendar()
-        if self.collide_point(*touch.pos) and not Disable.value:
+        if self.collide_point(*touch.pos):
             evinfo = join_child(appList().mycon, "EventInfo")
             day = self.text
             month = calendar.currentMonth
@@ -81,11 +71,10 @@ class Day(Label):
             else:
                 evinfo.updateIni(f"{day}/{month}/{year}")
 
-            appList().mycon.remove_widget(calendar)
+            Disappear(calendar)
         elif not calendar.collide_point(*touch.pos):
             # Cierra el calendario si se toca fuera de él.
-            appList().mycon.remove_widget(calendar)
-
+            Disappear(calendar)
 
 class Calendar(StackLayout):
     """
@@ -161,15 +150,6 @@ class TotalCalendar(BoxLayout):
         # Determina si estamos en el mes/año inicial para deshabilitar el botón "anterior"
         flag = True if self.currentMonth == 1 and self.currentYear == 2077 else False
         
-        # Limpia los efectos de hover de los días al cambiar de mes para evitar acumulación en la memoria o comportamientos extraños
-        for child in self.calendar.children:
-            Window.unbind(mouse_pos=child.hover)
-        
-        adv = self.buttons.advance
-        prv = self.buttons.previous
-        Window.unbind(mouse_pos=adv.hover)
-        Window.unbind(mouse_pos=prv.hover)
-
         # Actualiza etiquetas de texto
         self.info.ids.month.text = months[self.currentMonth]
         self.info.ids.year.text = str(self.currentYear)

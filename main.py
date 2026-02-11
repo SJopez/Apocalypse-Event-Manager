@@ -11,6 +11,7 @@ from modules.utilities import *
 from screens.event_list.events import MainEventContainter
 from screens.init_menu.face import Container
 from modules.modules import *
+from kivymd.app import MDApp
 
 class PlayerLayout(BoxLayout):
     """
@@ -262,7 +263,7 @@ class ScreenParent(ScreenManager):
         self.add_widget(ScreenChild("config", mycon))
         self.add_widget(ScreenChild("events", events))
 
-class Main(App):
+class Main(MDApp):
     """
     Clase principal de la aplicación
     Inicializa todas las pantallas y el gestor de navegación.
@@ -273,6 +274,7 @@ class Main(App):
         self.menu = ResourceMenu()
         self.events = MainEventContainter()
         self.screenParent = ScreenParent(self.mainMenu, self.menu, self.mycon, self.events)
+        self.theme_cls.theme_style = "Dark"
         return self.screenParent
 
 # Detecta el cierre de la aplicación para limpiar archivos temporales JSON.

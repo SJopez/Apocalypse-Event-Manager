@@ -2,7 +2,7 @@
 <EditableAdventure>:
     padding: 20, 0, 0, 0
     size_hint_y: None
-    height: 1200
+    height: 1210
     orientation: "vertical"
     spacing: 8
 
@@ -309,78 +309,60 @@
         font_size: 24
         size_hint: None, None
         size: self.texture_size 
-    
-    # Inputs para hora de inicio y fin (HH:MM - HH:MM)
+
     BoxLayout:
-        size_hint: None, None
         pos_hint: {'x': 0.01, 'y': 0}
+        size_hint: None, None
         height: 30
-        # Hora inicio
-        TimeInput:
-            id: hourIni
-            name: "ini"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
-        Label:
-            text: ":"
+
+        TimePickerButtonIni:
+            font_size: 20
+            text: "Inicio"
             size_hint: None, None
-            pos_hint: {'center_x': .5, "center_y": .5}
-            width: 20
-        # Minuto inicio
-        TimeInput:
-            id: minuIni
-            name: "ini"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
+            size: self.texture_size 
+            padding: 4
         Label:
             text: "-"
             size_hint: None, None
             pos_hint: {'center_x': .5, "center_y": .5}
             width: 40
-        # Hora fin
-        TimeInput:
-            id: hourEnd
-            name: "end"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
+        TimePickerButtonEnd:
+            font_size: 20
+            text: "Final"
+            size_hint: None, None
+            size: self.texture_size 
+            padding: 4
+
+    BoxLayout:
+        pos_hint: {'x': 0.01, 'y': 0}
+        size_hint: None, None
+        height: 30
+
         Label:
-            text: ":"
+            id: hourini
+            font_size: 20
+            text: "00:00"
+            size_hint: None, None
+            size: self.texture_size 
+            padding: 4
+        Label:
+            text: "-"
             size_hint: None, None
             pos_hint: {'center_x': .5, "center_y": .5}
-            width: 20
-        # Minuto fin
-        TimeInput:
-            id: minuEnd
-            name: "end"
-            text: "00"
-            size_hint: None, None    
-            size: (30, 30)
-            max_text_length: 20
-            multiline: False
-    
-    # Nota informativa sobre el formato de hora
-    Label:
-        index: 0
-        markup: True
-        text: "[b]Nota:[/b] Los horarios se interpretan en el formato de de 24 horas!"
-        font_size: 16
-        size_hint: None, None
-        pos_hint: {'x': 0.01, 'y': 0}
-        size: self.texture_size
-        color: 1, 1, 1, 0.8
-        padding: 0, 10, 0, 0 
+            width: 40
+        Label:
+            id: hourend
+            font_size: 20
+            text: "00:00"
+            size_hint: None, None
+            size: self.texture_size
+            padding: 4
 
     Label:
+        size_hint: None, None
+        height: 10
         index: 0
+
 
 #Estilo para la ventana de seleccion de color y sus elementos
 <ColorSelectorWindow>:

@@ -82,30 +82,16 @@ def validDate(Ini, End, TimeIni, TimeEnd):
     start, end = 0, 0
     td = 0
     try:
-        # Validar formato de hora y minuto
-        if len(hi + mi + he + me) > 8:
-            raise IndexError()
-        
-        # Convertir a enteros la hora comprobando así errores de formato
-        hi, mi = int(hi), int(mi)
-        he, me = int(he), int(me)
-
         # Crear timestamps(convertir fecha a segundos) para inicio y fin
         start = dt.datetime(int(Ini[2]), int(Ini[1]), int(Ini[0]), hi, mi).timestamp()
         end = dt.datetime(int(End[2]), int(End[1]), int(End[0]), he, me).timestamp()
      
-        # Validar rangos de hora y minuto
-        if hi < 0 or hi > 24 or he < 0 or he > 24:
-            raise IndexError()
-        if mi < 0 or mi > 59 or me < 0 or me > 59:
-            raise IndexError()
-        
         # Calcular timestamp de inicio + 24 horas (duración mínima)
         td = dt.datetime(int(Ini[2]), int(Ini[1]), int(Ini[0]) + 1, hi, mi).timestamp()
         
         # Validar que inicio < fin y duración mínima
-        if td > end: 
-            raise Exception()
+        if td > end:
+             raise Exception()
           
     except Exception as e:
         # Manejo de errores específicos
@@ -132,16 +118,16 @@ def checkEvent(eventInfo):
         # Caso: Evento no editable (basta tomar la información que ya se tiene del evento con la de los widgets proporcionada por el usuario)
         dateIni = eventInfo.dateIni.text
         dateEnd = eventInfo.dateEnd.text
-        timeIni = (eventInfo.timeIni[0].text, eventInfo.timeIni[1].text)
-        timeEnd = (eventInfo.timeEnd[0].text, eventInfo.timeEnd[1].text)
+        timeIni = (eventInfo.time[0].hour, eventInfo.time[0].minute)
+        timeEnd = (eventInfo.time[1].hour, eventInfo.time[1].minute)
         dateValid = validDate(dateIni, dateEnd, timeIni, timeEnd)
     else:
         # Caso: Evento editable (se toma toda la información de los widgets proporcionada por el usuario y se actualiza el JSON)                                
         edit = eventInfo.editable
         dateIni = edit.dateIni.text
         dateEnd = edit.dateEnd.text
-        timeIni = (edit.timeIni[0].text, edit.timeIni[1].text)
-        timeEnd = (edit.timeEnd[0].text, edit.timeEnd[1].text)
+        timeIni = (edit.time[0].hour, edit.time[0].minute)
+        timeEnd = (edit.time[1].hour, edit.time[1].minute)
         dateValid = validDate(dateIni, dateEnd, timeIni, timeEnd)
         
         # Actualizar el evento actual con los datos del formulario(widgets de la interfaz)
@@ -256,7 +242,6 @@ def verifyInterval(event, ini, end):
                 myCuantity = event["recursos"].get(int(type), 0)
                 total = get_one(int(type))["cantidad"]
                 if myCuantity and myCuantity + resources[type] > total:
-                    print(type)
                     return False
                 
     return True
@@ -297,7 +282,7 @@ def joinTime(event):
         if verifyInterval(event, tr[1] + 60, tr[1] + 60  + time):
             curr = tr[1] + 60
             ans = min(ans, curr)
-    
+
     return (ans, ans + time)     
 
 def mergeInformation(Date, Resources):

@@ -153,7 +153,7 @@ def config(widget, special, opacity, parent):
     Si la opacidad es baja (ventana abierta), actualiza el contenido de la ventana.
     """
     for child in widget.children:
-        if child != special:
+        if child != special and type(child).__name__ != "Zombie":
             child.opacity = opacity
     
     if opacity == 0.6:
@@ -210,6 +210,10 @@ def hasChild(parent, child):
             return True
     return False
 
+class Zombie(Image):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
 def resizeList(parent, value=None):
     """
     Recalcula y ajusta la altura del contenedor de la lista de eventos
@@ -219,6 +223,27 @@ def resizeList(parent, value=None):
     childCount += 4 if childCount % 4 != 0 else 0
     childCount -= (childCount % 4)
     parent.height = (childCount / 4) * 480 + (childCount / 4) * 20 + 170
+
+    if childCount == 0:
+        events = appList().events 
+        
+        if events.zombie != None:
+            events.zombie.opacity = 1
+        else:
+            events.zombie = Zombie()
+            events.add_widget(events.zombie)
+    else:
+        events = appList().events 
+        
+        if events.zombie != None:
+            events.zombie.opacity = 0
+        else:
+            print("mojon")
+            events.zombie = Zombie()
+            events.zombie.opacity = 0
+            events.add_widget(events.zombie)
+        
+        
 
 class JoinEvent(TextInput):
     """
@@ -451,6 +476,7 @@ class MainEventContainter(FloatLayout):
     """
     def __init__(self):
         super().__init__()
+        self.zombie = None
         self.background = Image(source="assets/background_events.png")
         self.background.opacity = 0.7
         self.add_widget(self.background)

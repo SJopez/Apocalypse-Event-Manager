@@ -429,5 +429,8 @@ Las instrucciones de cómo acceder al gráfico se encuentran en la sección ante
 
 **Autor:** 👨‍💻 Sergio Jorge Montero López
 
+**Aclaración válida:** En el repo sale una contribución del usuario LSN0WM4AN, quien es un amigo mio que quizo hacer un pull request a modo de broma, el único cambio que hizo fueron unas pocas líneas en el README, concretamente la parte de Fish (shell) (puede comprobarlo viendo el historial del proyecto)  
+
+
 Pd: Gracias por llegar hasta aquí; acabarlo en la fecha prevista me costó la nota de un TC de análisis y uno de álgebra, espero que las estrellitas valgan la pena 🐱 
 

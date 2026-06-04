@@ -1,19 +1,56 @@
 [
     {
-        "id": 1,
-        "titulo": "Aniquilamiento en la vecindad",
+        "id": -1,
+        "titulo": "Sdasdads",
         "tipo": [
             "Defensa"
         ],
-        "descripcion": "Nunca est\u00e1 de m\u00e1s salir un rato a estirar las piernas por los alrededores del refugio y eliminar alg\u00fan que otro infectado por el camino, pero ten cuidado no te sigan al regresar!",
-        "peligro": 2,
-        "ubicacion": "Alrededores del refugio",
-        "necesita": [
-            1,
-            2,
-            7,
-            8
+        "descripcion": "vvvvv",
+        "peligro": 1,
+        "ubicacion": "Interior del refugio",
+        "necesita": [],
+        "recurrente": true
+    },
+    {
+        "id": -1,
+        "titulo": "Sdasdads",
+        "tipo": [
+            "Defensa"
         ],
-        "recurrente": false
+        "descripcion": "vvvvv",
+        "peligro": 1,
+        "ubicacion": "Interior del refugio",
+        "necesita": [],
+        "recurrente": true,
+        "recursos": {
+            "20": 1,
+            "19": 1,
+            "18": 1,
+            "4": 1,
+            "3": 1
+        },
+        "tiempoReal": [
+            3377653260.0,
+            3379208460.0
+        ],
+        "fechaInicio": [
+            "10",
+            "1",
+            "2077"
+        ],
+        "fechaFin": [
+            "28",
+            "1",
+            "2077"
+        ],
+        "tiempoInicio": [
+            0,
+            0
+        ],
+        "tiempoFin": [
+            0,
+            0
+        ],
+        "imagen": "assets/event_running_images/example.png"
     }
 ]

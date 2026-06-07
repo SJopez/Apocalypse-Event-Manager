@@ -24,7 +24,7 @@ Al ser un tema icónico en la cultura popular —presente en cine, videojuegos y
 ## 🧟 Eventos y Recursos
 
 ### Eventos (Aventuras)
-Los eventos, también denominados **aventuras**, son situaciones que planificaría el líder para asegurar la supervivencia del refugio. Se clasifican en 3 tipos: **Defensa**, **Refugio** y **Supervivencia**.
+Los eventos, también denominados **aventuras**, son situaciones que planificaría el usuario para asegurar la supervivencia del refugio. Se clasifican en 3 tipos: **Defensa**, **Refugio** y **Supervivencia**.
 
 - **Defensa:** Actividades orientadas a la protección del perímetro, eliminación de amenazas cercanas y mantenimiento del arsenal bélico.
 - **Refugio:** Tareas internas de mantenimiento y reparación de las instalaciones del refugio.
@@ -262,7 +262,7 @@ A continuación, se presenta una guía detallada para navegar y utilizar las dif
 Al ejecutar la aplicación, te encontrarás con el **Menú de Inicio**, tu punto de partida en el apocalipsis. Aquí encontrarás las siguientes opciones:
 
 1.  **Comenzar:** Te lleva directamente a la sección principal de gestión, donde podrás administrar tus recursos y eventos.
-2.  **Cargar JSON:** Abre un explorador de archivos que te permite navegar por tus directorios locales para cargar un archivo JSON con eventos previamente guardados o configuraciones externas. *Nota: El archivo debe cumplir con la estructura de datos esperada por la aplicación.*
+2.  **Cargar JSON:** Abre un explorador de archivos que te permite navegar por tus directorios locales para cargar un archivo JSON con eventos previamente guardados. *Nota: El archivo debe cumplir con la estructura de datos esperada por la aplicación.*
 3.  **Guardar JSON:** Guarda el estado actual de tus aventuras y eventos en curso en un archivo JSON, permitiéndote respaldar tu progreso cómodamente para usarlo luego sin tener que manejar los archivos manualmente.
 4.  **Salir:** Cierra la aplicación de forma segura.
 

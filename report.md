@@ -422,6 +422,25 @@ Mediante las flechas del teclado es posible navegar por el gráfico:
 
 Las instrucciones de cómo acceder al gráfico se encuentran en la sección anterior.
 
+### Conclusiones
+Este proyecto fue para mi una gran oportunidad de profundizar en el lenguaje Python, viéndome totalmente involucrado en conceptos como la programación orientada a objetos y la creación de interfaces gráficas  
+
+#### Aprendizaje
+Si bien no es mi primera experiencia programando puedo asegurar que con este proyecto aprendí algunas importantes como:
+*   Organizar mejor el código
+*   Fundamentos de la programación orientada a objetos como la herencia
+*   Framework Kivy para la UI
+*   Framework Matplotlib para la creación de gráficos
+*   Manejo de fechas con la librería datetime
+
+#### Desafíos 
+El mayor desafío fue crear una interfaz completa y funcional, el selector de fecha de calendario está creado por mi pues Kivy no trae nativamente un selector de fecha (KivyMD si, pero no combina con el estilo visual del proyecto), cabe destacar el uso del algoritmo de recorrido de grafos DFS para recorrer el árbol de la interfaz (**join_child**)
+
+#### Uso de IA
+La IA me ayudó a comentar el código, darle estructura al informe, buscar documentación sobre Kivy, Matplotlib, Python. Y por supuesto generar todas las imágenes que contiene el proyecto. No usé la IA para generar código
+
+---
+
 > **Nota:** Por conveniencia para el estilo visual del gráfico, se limitó la duración mínima de un evento a 1 día.
 
 ---

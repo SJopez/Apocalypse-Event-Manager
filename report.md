@@ -193,13 +193,13 @@ Lo primero es obtener una copia de los archivos del proyecto en tu computadora.
 3.  Ejecuta el siguiente comando para descargar los archivos:
 
 ```bash
-git clone https://github.com/SJopez/Event-Manager-Apocalipsis.git
+git clone https://github.com/SJopez/Apocalypse-Event-Manager
 ```
 
 4.  Entra en la carpeta que se acaba de crear:
 
 ```bash
-cd Event-Manager-Apocalipsis
+cd Apocalypse-Event-Manager
 ```
 
 ### 2. Crear un Entorno Virtual
